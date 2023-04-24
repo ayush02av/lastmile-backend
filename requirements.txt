@@ -29,3 +29,4 @@ tqdm
 tzdata
 urllib3
 gunicorn
+python-dotenv
