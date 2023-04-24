@@ -1,0 +1,1 @@
+web: python manage.py migrate && python dummy.py && gunicorn backend.wsgi
