@@ -5,7 +5,7 @@ class User(AbstractUser):
     sub = models.CharField(max_length=100)
     sid = models.CharField(max_length=100)
     interests = models.ManyToManyField(to="database.Skill", related_name="user_interests", blank=True)
-    ratings = models.JSONField(default=dict, blank=True)
+    inactive_count = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.username}"
@@ -26,12 +26,18 @@ class Skill(models.Model):
     def __str__(self):
         return f"{self.slug}-{self.count}"
 
+class SkillUser(models.Model):
+    skill = models.ForeignKey(to=Skill, related_name="skilluser_skill", on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, related_name="skilluser_user", on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
+    
 class Event(models.Model):
     name = models.CharField(max_length=255)
     organizer = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='event_organizer')
     venue_options = models.JSONField(default=list, blank=True)
     venue = models.JSONField(default=dict, blank=True)
     category = models.ForeignKey(to=Skill, related_name="event_category", on_delete=models.CASCADE)
+    ended = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -41,11 +47,15 @@ class EventParticipant(models.Model):
     user = models.ForeignKey(to=User, related_name='eventparticipant', on_delete=models.CASCADE)
     vote = models.JSONField(default=dict, blank=True)
     rating = models.IntegerField(default=0)
-    
+
 class Collab(models.Model):
     from_user = models.ForeignKey(to=User, related_name='from_user', on_delete=models.CASCADE)
     to_user = models.ForeignKey(to=User, related_name='to_user', on_delete=models.CASCADE)
     skill = models.ForeignKey(to=Skill, related_name='skill', on_delete=models.SET_NULL, null=True, blank=True)
+    accepted = models.BooleanField(default=False)
+    rejected = models.BooleanField(default=False)
+    ended = models.BooleanField(default=False)
+    rating = models.IntegerField(default=0)
 
     def __str__(self):
         return f"From {self.from_user.__str__()} To {self.to_user.__str__()} For {self.skill.__str__()}"

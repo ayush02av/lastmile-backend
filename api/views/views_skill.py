@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.serializers import serializers_skill
@@ -12,3 +13,20 @@ class skills(APIView):
         serializer = self.serializer_class(queryset, many = True)
 
         return Response(serializer.data)
+
+class skill_user(APIView):
+    serializer_class = serializers_skill.skilluser_serializer
+    
+    def get(self, request, skill):
+        try:
+            return Response(
+                self.serializer_class(
+                    models.SkillUser.objects.filter(
+                        skill = models.Skill.objects.get(name = skill)
+                    ).order_by('-rating')
+                ).data
+            )
+        except:
+            return Response({
+                'detail': 'Skill does not exist'
+            }, status = status.HTTP_404_NOT_FOUND)
