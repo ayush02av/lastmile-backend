@@ -28,12 +28,12 @@ for skill in skills:
     ).save()
 
 events = [
-    ['rapping', 'https://cdn.telanganatoday.com/wp-content/uploads/2023/01/Pot.jpg'],
-    ['pottery', 'https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2018/03/28214729/hyderabadpoetryproject3.jpg'],
-    ['poetry', 'https://d3emaq2p21aram.cloudfront.net/media/cache/venue_roundup_single_image/uploads/TheVenueReport-Beauty101-AlissaNoelle-08.jpg'],
-    ['makeup', 'https://blog.ipleaders.in/wp-content/uploads/2021/05/How-do-you-organize-a-Runway-Fashion-Show-1.jpg'],
-    ['modelling', 'https://wallpapers.com/images/hd/aesthetic-bts-jin-phone-modelling-tnbwrfcb0q2lmtuu.jpg'],
-    ['beatboxing', 'https://www.musicianwave.com/wp-content/uploads/2022/02/How-to-Rap-Fast-788x525.jpg'],
+    ['pottery', 'https://cdn.telanganatoday.com/wp-content/uploads/2023/01/Pot.jpg'],
+    ['poetry', 'https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2018/03/28214729/hyderabadpoetryproject3.jpg'],
+    ['makeup', 'https://d3emaq2p21aram.cloudfront.net/media/cache/venue_roundup_single_image/uploads/TheVenueReport-Beauty101-AlissaNoelle-08.jpg'],
+    ['modelling', 'https://blog.ipleaders.in/wp-content/uploads/2021/05/How-do-you-organize-a-Runway-Fashion-Show-1.jpg'],
+    ['rapping', 'https://www.musicianwave.com/wp-content/uploads/2022/02/How-to-Rap-Fast-788x525.jpg'],
+    ['beatboxing', 'https://static.wikia.nocookie.net/beatbox/images/e/e7/Colaps_vs_D-low.jpg/revision/latest?cb=20200711014814'],
 ]
 
 for event in events:
