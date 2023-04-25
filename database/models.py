@@ -22,6 +22,7 @@ class Skill(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.CharField(max_length=6, unique=True)
     count = models.IntegerField(default=0)
+    image = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.slug}-{self.count}"
@@ -36,8 +37,9 @@ class Event(models.Model):
     organizer = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='event_organizer')
     venue_options = models.JSONField(default=list, blank=True)
     venue = models.JSONField(default=dict, blank=True)
-    category = models.ForeignKey(to=Skill, related_name="event_category", on_delete=models.CASCADE)
+    category = models.ForeignKey(to=Skill, related_name="event_category", on_delete=models.SET_NULL, null=True, blank=True)
     ended = models.BooleanField(default=False)
+    image = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

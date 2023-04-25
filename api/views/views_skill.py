@@ -9,9 +9,7 @@ class skills(APIView):
     
     def get(self, request):
         queryset = models.Skill.objects.all()
-
         serializer = self.serializer_class(queryset, many = True)
-
         return Response(serializer.data)
 
 class skill_user(APIView):
@@ -22,11 +20,13 @@ class skill_user(APIView):
             return Response(
                 self.serializer_class(
                     models.SkillUser.objects.filter(
-                        skill = models.Skill.objects.get(name = skill)
-                    ).order_by('-rating')
-                ).data
+                        skill = models.Skill.objects.get(name__iexact = skill)
+                    ).order_by('-rating'),
+                many = True).data
             )
-        except:
+
+        except Exception as exception:
             return Response({
-                'detail': 'Skill does not exist'
+                'message': 'Skill does not exist',
+                'exception': exception.__str__()
             }, status = status.HTTP_404_NOT_FOUND)

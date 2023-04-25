@@ -9,7 +9,8 @@ class skill_serializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class skilluser_serializer(serializers.ModelSerializer):
-    user = serializers_user.user_serializer
+    user = serializers_user.user_serializer()
+    skill = skill_serializer()
     
     class Meta(object):
         model = models.SkillUser
